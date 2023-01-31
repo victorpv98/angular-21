@@ -1,0 +1,40 @@
+<section *ngIf="validacion==false" class="alert alert-danger mb-3 alert-dismissible fade show">
+  {{mensaje}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</section>
+  <h2 class="text-center">Iniciar sesion</h2>
+  <section class="container-sm">
+    <section class="d-flex justify-content-center">
+      <section class="col-3 gap-2 shadow p-3">
+        <form action="" #form = "ngForm">
+          <section class="form-group mb-3 mt-3">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control " id="username" name="nombre" [(ngModel)]="name" required #nombre="ngModel">
+
+            <section *ngIf="!nombre.valid && (nombre.dirty || nombre.touched)" class="alert alert-danger mb-3 alert-dismissible fade show">
+              <section *ngIf="nombre.errors?.['required']">
+                El campo usuario es requerido
+              </section>
+            </section>
+          </section>
+          <section class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="password" name="passw" required #passw="ngModel" [minLength]="3">
+
+            <section *ngIf="!passw.valid && (passw.dirty || passw.touched)" class="alert alert-danger mb-3 alert-dismissible fade show">
+              <section *ngIf="passw.errors?.['required']">
+                El campo passw es requerido
+              </section>
+
+              <section *ngIf="passw.errors?.['minLength']">
+                El campo debe tener más de 3 digitos
+              </section>
+            </section>
+          </section>
+          <section class="btn-group justify-content-center d-flex">
+            <input class="btn btn-outline-primary mt-3" (click)="login()" value="Login" [disabled]="form.invalid">
+          </section>
+        </form>
+        </section>
+    </section>
+  </section>
